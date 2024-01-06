@@ -2,20 +2,22 @@ const express = require('express');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = 8080;
 
 const characters = ['Frodo Baggins', 'Gandalf', 'Aragorn', 'Legolas', 'Gimli'];
 const hmacSecret = 'lotr-server-example';
 
 app.use(bodyParser.json());
 
-// GET /characters endpoint
-app.get('/characters', (req, res) => {
-    res.json(characters);
+// GET /character endpoint
+app.get('/character', (req, res) => {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    const character = characters[randomIndex];
+    res.json(character);
 });
 
-// POST /movie endpoint with HMAC authentication
-app.post('/movie', (req, res) => {
+// POST /character endpoint with HMAC authentication
+app.post('/character', (req, res) => {
     const token = req.headers['x-token'];
 
     if (!verifyToken(token, hmacSecret)) {
@@ -23,8 +25,8 @@ app.post('/movie', (req, res) => {
         return;
     }
 
-    const { title, releaseYear } = req.body;
-    res.status(201).json({ message: `Movie was saved successfully with title: ${title} and releaseYear: ${releaseYear}` });
+    const { name, birthYear } = req.body;
+    res.status(201).json({ message: `New character named: ${name} born in: ${birthYear} was created successfully` });
 });
 
 function verifyToken(token, secretKey) {
