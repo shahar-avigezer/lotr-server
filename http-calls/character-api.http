@@ -1,0 +1,49 @@
+### GET characters
+GET http://localhost:8080/character
+Accept: application/json
+
+<> 2024-02-03T142223.200.json
+<> 2024-01-13T163120.200.json
+
+### POST characters
+< {%
+    request.variables.set("signature", crypto.hmac.sha256()
+        .withTextSecret(request.environment.get('hmac'))
+        .digest().toHex())
+%}
+POST http://localhost:8080/character
+Content-Type: application/json
+X-TOKEN: {{signature}}
+
+{
+  "name": "Rubi",
+  "birthYear": "1988"
+}
+
+<> 2024-01-13T171224.201.json
+<> 2024-01-13T170128.201.json
+<> 2024-01-13T163425.201.json
+<> 2024-01-13T163407.201.json
+<> 2024-01-13T154408.201.json
+<> 2024-01-13T154403.201.json
+<> 2024-01-06T160559.401.html
+<> 2024-01-06T160553.201.json
+<> 2024-01-06T153925.201.json
+<> 2024-01-06T153818.201.json
+<> 2024-01-06T153444.201.json
+<> 2024-01-06T153358.201.json
+<> 2024-01-06T153314.201.json
+<> 2024-01-06T153302.500.html
+<> 2024-01-06T153118.201.json
+<> 2024-01-06T153045.500.html
+<> 2024-01-06T153032.401.html
+<> 2024-01-06T152954.401.html
+<> 2024-01-06T152736.401.html
+<> 2024-01-06T152436.401.html
+<> 2024-01-06T152357.401.html
+<> 2024-01-06T151917.500.html
+<> 2024-01-06T150954.401.html
+<> 2024-01-06T144233.500.html
+<> 2024-01-06T143726.500.html
+<> 2024-01-06T143344.500.html
+<> 2024-01-06T143258.415.html

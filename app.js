@@ -26,7 +26,7 @@ app.post('/character', (req, res) => {
     }
 
     const { name, birthYear } = req.body;
-    res.status(201).json({ message: `New character named: ${name} born in: ${birthYear} was created successfully` });
+    res.status(201).json({ message: `New character named ${name} has been born in ${birthYear} successfully` });
 });
 
 function verifyToken(token, secretKey) {
